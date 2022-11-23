@@ -1,8 +1,0 @@
-function Hk = getHk(S, Vt, k)
-%getHk Return Hk 
-Sk = S(1:k, 1:k);
-Vtk = Vt(1:k, :);
-
-Hk = Sk*Vtk;
-end
-
