@@ -1,0 +1,53 @@
+function C = k_means(A, k, tol)
+% Function that uses the k-means algorithm to
+% compute the cluster matrix C.
+
+% Create random initial partition
+[M, N] = size(A);
+II = zeros(M,N,3);
+partition = sort(randi([1,N], 1, k));
+lengths = zeros(k,1);
+
+start = 1;
+for i = 1:k
+    lengths(i) = length(start:partition(i));
+    II(:,1:lengths(i), i) = A(:,start:partition(i));
+    start = partition(i);
+end
+
+% Compute corresponding centroid vectors
+C = computeCentroids(II,M,lengths,k);
+
+% Compute overall coherence of initial clusters
+Q_prev = overallCoherence(C, II, lengths, k);
+
+Q = 0;
+t = 1;
+
+while abs(Q_prev - Q) < tol
+    if Q ~= 0
+        Q_prev = Q;
+    end
+    
+    % Find closest centroid for every column vector in A and assign to that cluster
+    for j = 1:k
+        pi = II(:,:, j);
+        n = lengths(j);
+        for i = 1:n
+            distance = norm(pi(:,i)-C(:,1:k));
+            [~,I] = min(distance);
+            II_new(:,:,I) = [II_new(:,:,I) pi(:,i)];
+        end
+    end
+    
+    % Compute the centroids of the new partition
+    C = computeCentroids(II_new,M,k);
+    
+    % Compute the overall coherence of the new clusters
+    Q = overallCoherence(C,II_new,k);
+    
+    II = II_new
+    t = t + 1;
+end
+      
+end
