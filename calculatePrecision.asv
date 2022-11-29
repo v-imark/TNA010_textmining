@@ -1,0 +1,6 @@
+function [precision = getPrecAndRec(Dt, relevantDocs)
+
+
+precision = 0;
+
+end

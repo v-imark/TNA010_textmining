@@ -7,7 +7,7 @@ C = zeros(M,k);
 for j = 1:k
     pi = II(:,1:lengths(j), j);
     [m,n] = size(pi);
-    C(:,j) = sum(pi,2)./(m*n);
+    C(:,j) = sum(pi,2)./n;
     C(:,j) = C(:,j)./norm(C(:,j));
 end
 

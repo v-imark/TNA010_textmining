@@ -1,4 +1,4 @@
-function documentsNumber = LSI(A, query, k, tol)
+function [Hk,qk]  = LSI(A, query, k)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -16,6 +16,6 @@ qk = Uk'*query;
 %x = norm(full(data.A)- Ak, "fro")/norm(full(data.A), "fro")
 
 %Get cosineSimilarity in sorted order
-documentsNumber = cosineSimilarity(Hk,qk, tol);
+%documentsNumber = cosineSimilarity(Hk,qk, tol);
 end
 

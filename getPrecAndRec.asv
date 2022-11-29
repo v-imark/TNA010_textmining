@@ -1,0 +1,24 @@
+function [lsi_precision, lsi_recall, c_precision, c_recall] = getPrecAndRec(relevantDocs, tol)
+Nr = length(relevantDocs);
+
+precision = Dr/Dt;
+recall = Dr/Nr;
+lsi_precision = 1:length(tol);
+lsi_recall = lsi_precision;
+c_precision = lsi_recall;
+c_recall = lsi_precision;
+
+for i = 1:length(tol)
+    docsLSI = cosineSimilarity(Hk, lsi_qk, tol(i));
+    docsClust = cosineSimilarity(Gk, c_qk, tol(i));
+    
+    Dt = length(retrievedDocs);
+    Dr = length(intersect(retrievedDocs, relevantDocs));
+
+    
+    lsi_precision(i) = Dr/Dt; 
+    lsi_recall(i)] = Dr/Nr;
+    [c_precision(i), c_recall(i)] = getPrecAndRec(docsClust,relevantDocs);
+end
+
+end

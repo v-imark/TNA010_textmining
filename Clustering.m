@@ -1,4 +1,4 @@
-function relevantDocs = Clustering(A, query, k,tol)
+function [Gk,qk] = Clustering(A, query, k)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %Get Ck
@@ -17,6 +17,6 @@ qk = Pk'*query;
 % Ak = Pk * Gk;
 % x = norm(full(data.A)- Ak, "fro")/norm(full(data.A), "fro")
 
-relevantDocs = cosineSimilarity(Gk,qk, tol);
+%relevantDocs = cosineSimilarity(Gk,qk, tol);
 end
 
