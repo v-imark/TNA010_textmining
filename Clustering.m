@@ -4,6 +4,7 @@ function [Gk,qk] = Clustering(A, query, k)
 %Get Ck
 [~,C] = kmeans(A',k);
 C = C';
+C = C./norm(full(C));
 
 %QR
 [Pk, ~] = qr(C, 0);
